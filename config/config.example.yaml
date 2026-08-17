@@ -1,0 +1,79 @@
+app:
+  name: evoscout-aiagent
+  timezone: Asia/Shanghai
+  data_dir: ./data
+  max_concurrent_chats: 3
+
+# Agent model routing. A plain model name uses the DeepSeek/OpenAI-compatible provider.
+# Use provider/model form for explicit providers, for example: claude/claude-sonnet-4-5
+models:
+  default: deepseek-chat
+  agents: {}
+  subagent_default: inherit
+
+ai:
+  base_url: https://api.deepseek.com
+  model: deepseek-chat
+  batch_size: 6
+  min_relevance: 6.0
+  instant_threshold: 8.0
+  instant_push: true
+  max_daily_calls: 60
+  interests: "AI, large language models, agents, RAG, multimodal models, reasoning, evaluation, alignment"
+
+sources:
+  arxiv:
+    enabled: true
+    interval_minutes: 60
+    fetch_count: 50
+    min_interval_s: 3.0
+  semantic_scholar:
+    enabled: true
+    min_interval_s: 3.5
+    interval_hours: 12
+  alphaxiv:
+    enabled: true
+    min_interval_s: 2.0
+    retry_404_after_days: 7
+    ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+  hackernews:
+    enabled: true
+    min_score: 150
+    top_n: 30
+  reddit:
+    enabled: true
+    min_interval_s: 2.0
+    max_consecutive_failures: 5
+  rss:
+    enabled: true
+    feeds: []
+    # feeds:
+    #   - {name: Example Feed, url: "https://example.com/feed.xml"}
+
+push:
+  digest_time: "09:00"
+  targets: []
+
+security:
+  allowed_users: []
+  script_dir: ./scripts
+  scripts: {}
+  shell_allow_prefixes:
+    - "git status"
+    - "git log"
+    - "conda env list"
+    - "pip list"
+    - "nvidia-smi"
+    - "tasklist"
+    - "python --version"
+  danger_patterns:
+    - "rm "
+    - "del "
+    - "git reset --hard"
+    - "pip uninstall"
+    - "shutdown"
+    - "taskkill"
+    - "format "
+
+scheduler:
+  misfire_grace_time: 3600

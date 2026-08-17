@@ -1,0 +1,35 @@
+# Secrets and local config
+.env
+config/.env
+config/config.yaml
+*.pem
+*.key
+*.crt
+
+# Runtime state
+data/
+memory/
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.sqlite
+*.sqlite3
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
